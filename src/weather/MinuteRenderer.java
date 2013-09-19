@@ -79,7 +79,7 @@ public class MinuteRenderer
 		this.minuteRdn = (float)Math.toRadians((((float)minute / 60f) * 360f) - 90);
 		this.hourRdn = (float)Math.toRadians(((float)hour/12f)*360 - 90);
 	}
-
+  
 	public void reloadState()
 	{
 		d = prefs.getFloat("sdens", 1.0f);
