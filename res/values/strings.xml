@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World!</string>
+    <string name="app_name">My Social Phone</string>
+    <string name="app_name_phone">My Social Tablet</string>
+    
+    <string name="line0text">Preferences</string>
+    
+   	<string name="line11text">Current</string>
+    <string name="line12text"> | Weather</string>
+    
+   	<string name="line21text">Range</string>
+    <string name="line22text"> | Low to High</string>
+
+	<string name="line31text">Precips</string>
+    <string name="line32text"> | Prob</string>
+    
+    <string name="eula_title">License</string>
+	<string name="eula_accept">Accept</string>
+	<string name="eula_refuse">Refuse</string>
+	
+    <string name="white">#000000</string>
+	<string name="black">#FFFFFF</string>
+	<string name="grey">#969696</string>
+	
+	<string name="tutorial">	    
+	  	You\'ll want to play with the settings, so be sure to touch the center of the clock!	  		  	
+	  	\n\n\n
+	  	If something doesn\'t behave right, please email me the problem instead 
+	  	of giving 1 star, it\'s better for everyone. 	  	
+	  	\n\n\n
+	  	Thank you for downloading and enjoy!	    
+</string>
+	
+	
+</resources>

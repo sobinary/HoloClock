@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="horizontal" 
+>
+
+    <TextView
+    android:id="@+id/launch"
+	android:contentDescription="@string/hello"
+	android:layout_height="fill_parent"
+	android:layout_width="0dp"
+	android:layout_weight="0.1"
+	/>
+    
+	<ImageView
+	android:id="@+id/clockimg"
+	android:contentDescription="@string/hello"
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content"
+	android:scaleType="fitCenter"
+	android:layout_gravity="center"
+	/>
+
+	<TextView
+	android:orientation="horizontal"
+	android:layout_height="fill_parent"
+	android:layout_width="0dp"
+	android:layout_weight="0.1"
+	/>
+			
+</LinearLayout>

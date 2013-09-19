@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<appwidget-provider
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:configure="sobinmain.PreferencesActivity" 
+android:minWidth="250dip"
+android:minHeight="45dip"  
+android:updatePeriodMillis="9999999999"
+android:initialLayout="@layout/date_time" 
+/>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<appwidget-provider
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:configure="sobinmain.PreferencesActivity"
+android:minWidth="250dip"
+android:minHeight="110dip"  
+android:updatePeriodMillis="9999999999"
+android:initialLayout="@layout/main_phone"
+android:resizeMode="horizontal"
+ 
+/>

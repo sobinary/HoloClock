@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    	<string-array name="trunc_vals">
+		<item>15</item>
+		<item>16</item>
+		<item>17</item>
+		<item>18</item>
+		<item>19</item>
+		<item>20</item>
+		<item>21</item>
+		<item>22</item>
+		<item>23</item>
+		<item>24</item>
+		<item>25</item>
+		<item>26</item>
+		<item>27</item>
+		<item>28</item>
+		<item>29</item>
+		<item>30</item>
+	</string-array>
+	
+    	
+	<string-array name="col_entries">
+		<item>White</item>
+		<item>Android-Blue</item>
+	</string-array>
+	
+	<string-array name="col_vals">
+		<item>#ffffffff</item>
+		<item>#ff33b5e5</item>
+	</string-array>
+	
+		
+	<string-array name="c2rad_entries">
+		<item>45%</item>
+		<item>50%</item>
+		<item>55%</item>
+		<item>60%</item>
+		<item>65%</item>
+		<item>70%</item>
+		<item>75%</item>
+		<item>80%</item>
+		<item>85%</item>
+		<item>90%</item>
+		<item>95%</item>
+		<item>100%</item>
+	</string-array>
+		
+	<string-array name="c2rad_vals">
+		<item>45f</item>
+		<item>50f</item>
+		<item>55f</item>
+		<item>60f</item>
+		<item>65f</item>
+		<item>70f</item>
+		<item>75f</item>
+		<item>80f</item>
+		<item>85f</item>
+		<item>90f</item>
+		<item>95f</item>
+		<item>100f</item>
+	</string-array>
+
+	<string-array name="c2rad_entries2">
+		<item>25%</item>
+		<item>30%</item>
+		<item>35%</item>
+		<item>40%</item>
+		<item>45%</item>
+	</string-array>
+		
+	<string-array name="c2rad_vals2">
+		<item>25f</item>
+		<item>30f</item>
+		<item>35f</item>
+		<item>40f</item>
+		<item>45f</item>
+	</string-array>
+		
+	<string-array name="interval_entries">
+		<item>10 Minutes</item>
+		<item>15 Minutes</item>
+		<item>30 Minutes</item>
+		<item>1 Hour</item>
+		<item>2 Hours</item>
+		<item>6 Hours</item>
+		<item>1 Day</item>
+	</string-array>
+		
+	<string-array name="interval_vals">
+		<item>10l</item>
+		<item>15l</item>
+		<item>30l</item>
+		<item>60l</item>
+		<item>120l</item>
+		<item>360l</item>
+		<item>1440l</item>
+	</string-array>
+		
+	
+		
+			
+</resources>
