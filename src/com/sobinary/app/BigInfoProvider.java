@@ -1,13 +1,17 @@
-package sobinmain;
+package com.sobinary.app;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-import weather.WeatherService;
-import weather.CalService;
-import base.Core;
-import base.IO;
+import com.sobinary.base.Core;
+import com.sobinary.base.IO;
 import com.sobinary.clockplus.R;
+import com.sobinary.work.CalService;
+import com.sobinary.work.MinuteService;
+import com.sobinary.work.WeatherService;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -22,54 +26,65 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
-public class GenMan extends AppWidgetProvider  
+public class BigInfoProvider extends AppWidgetProvider  
 {
-	
 	@Override
 	public void onEnabled(Context cont)
 	{
 		super.onEnabled(cont);
-		Core.print("GenMan onEnabled");
-		setGlobalDims(cont);
-		beginTime(cont.getApplicationContext());		
 	}
 	
 	@Override
 	public void onUpdate(Context cont, AppWidgetManager appMan, int[] ids)
 	{
 		super.onUpdate(cont, appMan, ids);
-		Core.print("GenMan onUpdate");
-	}
-	
-	@Override
-	public void onDeleted (Context cont, int[] ids)
-	{
-		super.onDeleted(cont, ids);
-		Core.print("GenMan onDelete");
+		Core.print("Generic update");
+		beginTime(cont.getApplicationContext());
 	}
 	
 	@Override
 	public void onDisabled(Context cont)
 	{
 		super.onDisabled(cont);
-		Core.print("GenMan onDeleted");
+		Core.print("Provider disabled");
 		endTime(cont);
 	}
 	
-	
-	public static boolean isAlive(Context cont)
+	private static boolean isAlive(Context cont, Class<?>clazz)
 	{
-		ComponentName thisWidget = new ComponentName(cont, GenMan.class);
+		ComponentName thisWidget = new ComponentName(cont, clazz);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		return (appMan.getAppWidgetIds(thisWidget).length > 0) ? true : false;
 	}
 
+	public static List<Class<?>>getLivingProviders(Context cont)
+	{
+		ArrayList<Class<?>>living = new ArrayList<Class<?>>();
+		if(isAlive(cont, BigInfoProvider.class)) living.add(BigInfoProvider.class);
+		if(isAlive(cont, BigClockProvider.class)) living.add(BigClockProvider.class);
+		if(isAlive(cont, SmlInfoProvider.class)) living.add(SmlInfoProvider.class);
+		return living;
+	}
 	
 	
 	
 	
 	
-	/*******************************PUB STATIC API***********************************/
+	
+	
+	
+	
+	
+	
+	/*******************************WIDGET STATE API***********************************/
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
@@ -94,12 +109,13 @@ public class GenMan extends AppWidgetProvider
 
 	public static void beginTime(Context cont)
 	{
+		setGlobalDims(cont);
+		
 		AlarmManager alman = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
-
 		Intent timeService = new Intent(cont, MinuteService.class);
 		PendingIntent timePending = PendingIntent.getService(cont, 0, timeService, 0);
+
 		int rem = 60 - Calendar.getInstance().get(Calendar.SECOND);
-		
 		alman.setRepeating(AlarmManager.RTC, System.currentTimeMillis() + rem * 1000, 60000, timePending);
 		
 		if(rem > 3)
@@ -112,21 +128,20 @@ public class GenMan extends AppWidgetProvider
 	
 	public static void endTime(Context cont)
 	{
-		if(GenMan.isAlive(cont) && !DTMan.isAlive(cont) && !UniMan.isAlive(cont))
-		{
-			Core.print("All Widgets dead, ending");
-			AlarmManager alman = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
-			
-			Intent timeService = new Intent(cont, MinuteService.class);
-			PendingIntent timePending = PendingIntent.getService(cont, 0, timeService, 0);
-			alman.cancel(timePending);
-		}
+		if(getLivingProviders(cont).size() > 0) return;
+		
+		Core.print("Killing minute service");
+		AlarmManager alman = (AlarmManager) cont.getSystemService(Context.ALARM_SERVICE);
+		
+		Intent timeService = new Intent(cont, MinuteService.class);
+		PendingIntent timePending = PendingIntent.getService(cont, 0, timeService, 0);
+		alman.cancel(timePending);
 	}
 	
 	public static void setTextLine(Context cont, int line, String left, String right)
 	{
 		RemoteViews remote = resetRem(cont, true);
-		ComponentName thisWidget = new ComponentName(cont, GenMan.class);
+		ComponentName thisWidget = new ComponentName(cont, BigInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		
 		int ind = lineToInd(line);
@@ -166,10 +181,10 @@ public class GenMan extends AppWidgetProvider
 	
 	public static void setImage(Context cont, Bitmap bmp, int id)
 	{
-		saveI(cont, bmp);
+		saveImage(cont, bmp);
 		RemoteViews remote = resetRem(cont, false);
 		
-		ComponentName thisWidget = new ComponentName(cont, GenMan.class);
+		ComponentName thisWidget = new ComponentName(cont, BigInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		remote.setImageViewBitmap(id, bmp);
 		appMan.updateAppWidget(thisWidget, remote);  
@@ -186,8 +201,9 @@ public class GenMan extends AppWidgetProvider
 		int color = Color.parseColor(prefs(cont).getString("macol", "#ffffffff"));
 		String[]old = load(cont);
 
-		if(img){
-			Bitmap oldI = loadI(cont);
+		if(img)
+		{
+			Bitmap oldI = loadImage(cont.getApplicationContext());
 			if(oldI != null)remoteV.setImageViewBitmap(R.id.clockimg, oldI);
 		}
 
@@ -224,6 +240,24 @@ public class GenMan extends AppWidgetProvider
 		return remoteV;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	/***********************************PERSISTENT STATE MGMT*****************************************/
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private static String[] load(Context cont)
 	{
 		String[]old = (String[])IO.load("savedtext", cont);
@@ -240,25 +274,25 @@ public class GenMan extends AppWidgetProvider
 		return old;
 	}
 	
-	private static Bitmap loadI(Context cont)
+	private static Bitmap loadImage(Context cont)
 	{
 		try 
 		{
-			return BitmapFactory.decodeStream(cont.openFileInput("clkimg"));
+			return BitmapFactory.decodeStream(cont.openFileInput("clkimgsob"));
 		} 
 		catch (Exception e) 
 		{
-			Core.print("Err bmp: " + e.getMessage());
+			Core.print("Err loading bmp: " + e.getMessage());
 			return null;
 		}
 		
 	}
 	
-	private static void saveI(Context cont, Bitmap bmp)
+	private static void saveImage(Context cont, Bitmap bmp)
 	{
 		try
 		{
-			FileOutputStream out = cont.openFileOutput("clkimg", Context.MODE_PRIVATE);
+			FileOutputStream out = cont.openFileOutput("clkimgsob", Context.MODE_PRIVATE);
 			bmp.compress(Bitmap.CompressFormat.PNG, 100, out);
 		}
 		catch(Exception e)

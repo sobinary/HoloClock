@@ -2,8 +2,8 @@
 <manifest 
 xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.sobinary.clockplus"
-android:versionCode="11"
-android:versionName="1.8"  
+android:versionCode="12"
+android:versionName="2.0"  
 >                 
     <uses-sdk     
     android:minSdkVersion="14"
@@ -30,7 +30,7 @@ android:versionName="1.8"
 	android:label="Holo Clock Widget++"
     > 
 		<activity 
-		android:name="sobinmain.PreferencesActivity"
+		android:name="com.sobinary.app.PreferencesActivity"
 		>
     		<intent-filter>
         		<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
@@ -44,21 +44,21 @@ android:versionName="1.8"
 		/>
 
 		<service
-		android:name="weather.WeatherService" 
+		android:name="com.sobinary.work.WeatherService" 
 		/>
 
 		<service
-		android:name="sobinmain.MinuteService" 
+		android:name="com.sobinary.work.MinuteService" 
 		/>
 				
 
 		<service
-		android:name="weather.CalService" 
+		android:name="com.sobinary.work.CalService" 
 		/>
 		
 		
 		<receiver 
-		android:name="sobinmain.GenMan"     
+		android:name="com.sobinary.app.BigInfoProvider"     
 		android:label="2-Holo Info Large++"
 		>
     		<intent-filter>
@@ -72,7 +72,7 @@ android:versionName="1.8"
 		</receiver>
 
 		<receiver 
-		android:name="sobinmain.DTMan"     
+		android:name="com.sobinary.app.SmlInfoProvider"     
 		android:label="3-Holo Info Small++"
 		>
     		<intent-filter>
@@ -86,7 +86,7 @@ android:versionName="1.8"
 		</receiver>
 				
 		<receiver 
-		android:name="sobinmain.UniMan"     
+		android:name="com.sobinary.app.BigClockProvider"     
 		android:label="1-Holo Clock++"
 		>
     		<intent-filter>

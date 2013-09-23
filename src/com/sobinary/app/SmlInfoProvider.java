@@ -1,8 +1,7 @@
-package sobinmain;
+package com.sobinary.app;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,63 +10,25 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
-import base.Core;
-import base.IO;
+
+import com.sobinary.base.IO;
 import com.sobinary.clockplus.R;
 
-public class DTMan extends AppWidgetProvider
+public class SmlInfoProvider extends BigInfoProvider
 {
-	@Override
-	public void onEnabled(Context cont)
-	{
-		super.onEnabled(cont);
-		Core.print("DTMan onEnabled");
-		GenMan.setGlobalDims(cont);
-		GenMan.beginTime(cont);		
-	}
-	 
-	@Override
-	public void onUpdate(Context cont, AppWidgetManager appMan, int[] ids)
-	{
-		super.onUpdate(cont, appMan, ids);
-		Core.print("DTMan onUpdate");
-	}
-	
-	@Override
-	public void onDeleted (Context cont, int[] ids)
-	{
-		super.onDeleted(cont, ids);
-		Core.print("DTMan onDeleted");
-	}
-	
-	@Override
-	public void onDisabled(Context cont)
-	{
-		super.onDisabled(cont);
-		Core.print("DTMan onDisable");
-		GenMan.endTime(cont);
-	}
 
+	
 	public static boolean isAlive(Context cont)
 	{
-		ComponentName thisWidget = new ComponentName(cont, DTMan.class);
+		ComponentName thisWidget = new ComponentName(cont, SmlInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		return (appMan.getAppWidgetIds(thisWidget).length > 0) ? true : false;
 	}
 	
-	
-	
-	
-	
-
-	
-	/*******************************STATIC PUB API***********************************/
-	
-	
 	public static void setTextLine(Context cont, int line, String left)
 	{
 		RemoteViews remote = resetRem(cont);
-		ComponentName thisWidget = new ComponentName(cont, DTMan.class);
+		ComponentName thisWidget = new ComponentName(cont, SmlInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		
 		int color = Color.parseColor((prefs(cont).getString("macol", "#ffffffff")));
@@ -81,7 +42,7 @@ public class DTMan extends AppWidgetProvider
 	{
 		RemoteViews remote = resetRem(cont);
 		
-		ComponentName thisWidget = new ComponentName(cont, DTMan.class);
+		ComponentName thisWidget = new ComponentName(cont, SmlInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		remote.setImageViewBitmap(id, bmp);
 		appMan.updateAppWidget(thisWidget, remote);  

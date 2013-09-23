@@ -1,13 +1,14 @@
-package sobinmain;
+package com.sobinary.app;
 
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import base.Core;
 
 import com.sobinary.clockplus.R;
+import com.sobinary.work.MinuteService;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -20,6 +21,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
+
+
+
 
 public class PreferencesActivity extends PreferenceActivity 
 {	
@@ -37,7 +41,6 @@ public class PreferencesActivity extends PreferenceActivity
 	public void onStop()
 	{
 		super.onStop();
-		Core.print("Prefs Stopped");
         MinuteService.tic(this);
 	}
 	
@@ -109,28 +112,31 @@ public class PreferencesActivity extends PreferenceActivity
 	{
 		final PackageManager pm = getPackageManager();
 		List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-		
-		ArrayList<String>_keys = new ArrayList<String>();
-		ArrayList<String>_vals = new ArrayList<String>();
+		ArrayList<String> pairs = new ArrayList<String>();
 		
 		for (ApplicationInfo pkg : packages) 
 		{
-			if ((pkg.flags & ApplicationInfo.FLAG_SYSTEM) !=1)
+//			if ((pkg.flags & ApplicationInfo.FLAG_SYSTEM) !=1)
 			{
-				_keys.add(pkg.packageName);
-				_vals.add((String) pm.getApplicationLabel(pkg));
+				pairs.add(pm.getApplicationLabel(pkg) + ":" + pkg.packageName);
 			}
 		} 
-
-		ListPreference lp = (ListPreference)this.findPreference("launchoice");
-		CharSequence[]keys = new CharSequence[_keys.size()];
-		CharSequence[]vals = new CharSequence[_vals.size()];
 		
-		for(int i=0; i < keys.length; i ++)keys[i] = _keys.get(i);
-		for(int i=0; i < vals.length; i ++)vals[i] = _vals.get(i);
+		Collections.sort(pairs);
 
-		lp.setEntryValues(keys);
-		lp.setEntries(vals);
+		ListPreference listPref = (ListPreference)this.findPreference("launchoice");
+		CharSequence[]keys = new CharSequence[pairs.size()];
+		CharSequence[]vals = new CharSequence[pairs.size()];
+
+		for(int i=0; i < pairs.size(); i++)
+		{
+			String[]pair = pairs.get(i).split(":");
+			vals[i] = pair[0];
+			keys[i] = pair[1];
+		}
+
+		listPref.setEntryValues(keys);
+		listPref.setEntries(vals);
 	}
 	
 }

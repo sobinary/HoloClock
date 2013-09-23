@@ -1,4 +1,4 @@
-package weather;
+package com.sobinary.work;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -12,10 +12,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import sobinmain.GenMan;
+import com.sobinary.app.BigInfoProvider;
+import com.sobinary.base.Core;
 
 
-import base.Core;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -71,7 +72,7 @@ public class WeatherService extends Service
 			if(netLoc == null)
 			{ 
 				Core.print("NetLoc null"); 
-				GenMan.setTextLine(cont, 1, "Oops", "GPS Location");
+				BigInfoProvider.setTextLine(cont, 1, "Oops", "GPS Location");
 				return null; 
 			}
 			return netLoc.getLatitude()+","+netLoc.getLongitude();
@@ -80,8 +81,8 @@ public class WeatherService extends Service
 		{
 			Core.print("Error getting system location");
 			Core.printe(e);
-			GenMan.setTextLine(cont, 1, "Oops", "GPS Location");
-			GenMan.setTextLine(cont, 2, "Oops", "GPS Location");
+			BigInfoProvider.setTextLine(cont, 1, "Oops", "GPS Location");
+			BigInfoProvider.setTextLine(cont, 2, "Oops", "GPS Location");
 			return null;
 		}
 	}
@@ -115,16 +116,16 @@ public class WeatherService extends Service
 	
 	private static void getWeather(Context cont, String loc)
 	{
-		GenMan.setTextLine(cont, 1, "...", "...");
+		BigInfoProvider.setTextLine(cont, 1, "...", "...");
 		sendReceive(URL_LEFT + "/conditions/q/" + loc + ".json");
 		
 		boolean celc = prefs(cont).getBoolean("eurotemp", false);
 		String[]weather = extractTemperature(celc);
 
 		if(weather == null) 
-			GenMan.setTextLine(cont, 1, "Oops", "Try Again");
+			BigInfoProvider.setTextLine(cont, 1, "Oops", "Try Again");
 		else
-			GenMan.setTextLine(cont, 1, weather[1], pretty(Integer.parseInt(weather[0]),celc));
+			BigInfoProvider.setTextLine(cont, 1, weather[1], pretty(Integer.parseInt(weather[0]),celc));
 	}
 
 	private static String[] extractTemperature(boolean celc)
@@ -171,7 +172,7 @@ public class WeatherService extends Service
 	
 	private void getOutlook(Context cont, String loc)
 	{
-		GenMan.setTextLine(cont, 2, "...", "...");
+		BigInfoProvider.setTextLine(cont, 2, "...", "...");
 		Core.print("Outlook for: " + loc);
 		long start = System.currentTimeMillis();
 		sendReceive(URL_LEFT + "/hourly/q/" + loc + ".json" );
@@ -187,14 +188,13 @@ public class WeatherService extends Service
 
 				boolean preciping = false, snow = false;
 				int h_offset = Integer.parseInt(days.getJSONObject(0).getJSONObject("FCTTIME").getString("hour"));
-				int minChance = Integer.parseInt(prefs(cont).getString("minchance", "20"));
 				
 				for(int i=0; i < 12; i++)
 				{
 					JSONObject day = days.getJSONObject(i);
 					pop = Integer.parseInt( day.getString("pop") );
 					
-					if(pop >= minChance)
+					if(pop >= 20)
 					{
 						popMax = Core.max(pop, popMax);
 						popMin = Core.min(pop, popMin);
@@ -214,24 +214,24 @@ public class WeatherService extends Service
 				String[]rainMsg = rainlessText();
 
 				if(first == -1)
-					GenMan.setTextLine(this, 2, rainMsg[0], rainMsg[1]);
+					BigInfoProvider.setTextLine(this, 2, rainMsg[0], rainMsg[1]);
 				else if(first == 0 && last == 0)
-					GenMan.setTextLine(this, 2, precipType, "Almost Done");
+					BigInfoProvider.setTextLine(this, 2, precipType, "Almost Done");
 				else if(first == 0)
-					GenMan.setTextLine(this, 2, precipType, popMax + "% Until " + iToH(h_offset+last, euro, true));
+					BigInfoProvider.setTextLine(this, 2, precipType, popMax + "% Until " + iToH(h_offset+last, euro, true));
 				else
-					GenMan.setTextLine(this, 2, precipType, popMax+ "% at "+iToH(h_offset+first, euro, true));			
+					BigInfoProvider.setTextLine(this, 2, precipType, popMax+ "% at "+iToH(h_offset+first, euro, true));			
 			}
 
 			catch(Exception e)
 			{
 				Core.print("[GetOutlook]Error JSON proc");
 				Core.printe(e);
-				GenMan.setTextLine(this, 2, "Oops", "Try Again");
+				BigInfoProvider.setTextLine(this, 2, "Oops", "Try Again");
 			}
 		}
 		else
-			GenMan.setTextLine(this, 2, "Oops", "Try Again");
+			BigInfoProvider.setTextLine(this, 2, "Oops", "Try Again");
 	}	
 
 	private static String[]rainlessText()

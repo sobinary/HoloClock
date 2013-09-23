@@ -22,14 +22,17 @@
     <string name="white">#000000</string>
 	<string name="black">#FFFFFF</string>
 	<string name="grey">#969696</string>
-	
-	<string name="tutorial">	    
-	  	You\'ll want to play with the settings, so be sure to touch the center of the clock!	  		  	
-	  	\n\n\n
-	  	If something doesn\'t behave right, please email me the problem instead 
-	  	of giving 1 star, it\'s better for everyone. 	  	
-	  	\n\n\n
-	  	Thank you for downloading and enjoy!	    
+
+<string name="tutorial">
+Developers! This app is now open source, see the store listing for a GitHub link! 
+\n\n\n  	    
+If the clock is too small/skinny/fat, play around with the \"Size Factor\" 
+value in the settings.	  		  	
+\n\n\n
+If something doesn\'t behave right, please email me the problem instead 
+of rating 1 star, it\'s better for everyone. 	  	
+\n\n\n
+Thank you for downloading and enjoy!	    
 </string>
 	
 	

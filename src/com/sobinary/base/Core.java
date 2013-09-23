@@ -1,8 +1,9 @@
-package base;
+package com.sobinary.base;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.Timer;
 
@@ -134,6 +135,30 @@ public class Core
 		return day+" "+ now.get( Calendar.DAY_OF_MONTH );
 	}
 
+	private static boolean isPrimitive(Field field)
+	{
+		if( field.getType().equals(Integer.TYPE) ) return true;
+		if( field.getType().equals(Float.TYPE) ) return true;
+		if( field.getType().equals(Boolean.TYPE) ) return true;
+		if( field.getType().equals(String.class) ) return true;
+		
+		return false;
+	}
+	
+	public static void printPrimState(Object inst)
+	{
+		try
+		{
+			Field[] fields = inst.getClass().getDeclaredFields();
+			for(Field field: fields)
+				if(isPrimitive(field))
+					print(field.getName() + " => " + field.get(inst).toString());
+		}
+		catch(Exception e)
+		{
+			Core.print("Could not print primitive state...");
+		}
+	}
 
 }
 

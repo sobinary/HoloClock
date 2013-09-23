@@ -33,6 +33,8 @@
 	
 		
 	<string-array name="c2rad_entries">
+		<item>35%</item>
+		<item>40%</item>
 		<item>45%</item>
 		<item>50%</item>
 		<item>55%</item>
@@ -43,11 +45,11 @@
 		<item>80%</item>
 		<item>85%</item>
 		<item>90%</item>
-		<item>95%</item>
-		<item>100%</item>
 	</string-array>
 		
 	<string-array name="c2rad_vals">
+		<item>35f</item>
+		<item>40f</item>	
 		<item>45f</item>
 		<item>50f</item>
 		<item>55f</item>
@@ -58,8 +60,6 @@
 		<item>80f</item>
 		<item>85f</item>
 		<item>90f</item>
-		<item>95f</item>
-		<item>100f</item>
 	</string-array>
 
 	<string-array name="c2rad_entries2">

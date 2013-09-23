@@ -2,6 +2,72 @@
 <PreferenceScreen
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
+		<PreferenceCategory
+		android:title="Specialized Settings"
+		>
+
+
+
+
+
+
+	<PreferenceScreen 
+	android:title="Clock Widget Settings"
+	>
+		    <PreferenceCategory 
+		android:title="Clock Settings"
+		>			
+			<EditTextPreference
+			android:key="lsize"
+			android:title="Large Clock Resolution"
+			android:summary="Increase if the clock is too small or blury"
+			android:defaultValue="240"
+			android:inputType="number"
+			/>
+	    		    		
+			<ListPreference
+			android:key="smallperc"
+			android:title="Minute Circle Size"
+			android:entries="@array/c2rad_entries"
+			android:entryValues="@array/c2rad_vals"
+			android:defaultValue="50f"
+			/>   
+
+		</PreferenceCategory>
+	
+	
+		<PreferenceCategory 
+		android:title="Gauge Settings"
+		>
+			<CheckBoxPreference
+			android:title="Show Battery Gauge"
+			android:key="showbat"
+			android:defaultValue="true"
+			android:summary="May activate 1 minute after setup"
+			/>
+
+			<CheckBoxPreference
+			android:title="Show Weather Gauge"
+			android:key="showweather"
+			android:defaultValue="true"
+			/>		
+			
+			<ListPreference
+			android:key="weatherinterval"
+			android:title="Update Interval"
+			android:entries="@array/interval_entries"
+			android:entryValues="@array/interval_vals"
+			android:defaultValue="60l"
+			android:dependency="showweather"
+			/>   
+			    
+		</PreferenceCategory>
+				        	   
+    </PreferenceScreen>
+
+
+
+
 	<PreferenceScreen 
 	android:title="Info Widget Settings"
 	>
@@ -11,46 +77,20 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			<EditTextPreference
 			android:key="lookahead"
 			android:title="Number of days to consider"
-			android:defaultValue="30"
+			android:defaultValue="40"
 			android:summary="Set to 1 for today only"
 			android:inputType="number" 
 			/>   
-		</PreferenceCategory>		
-		
-		<PreferenceCategory
-		android:title="Weather"
-		>
-			<EditTextPreference
-			android:key="minchance"
-			android:title="Minimum precipitations % chance"
-			android:defaultValue="30"
-			android:summary="Minimum percentage precipitations need to be reported"
-			android:inputType="number" 
-			/>   
-		    			
-			<CheckBoxPreference
-			android:key="eurotemp"
-			android:title="Use Celcius"
-			/>   
-	
 		</PreferenceCategory>		
 
 		<PreferenceCategory
 		android:title="Appearance"
 		>
-			<ListPreference
-			android:key="macol"
-			android:title="Text Color"
-			android:entries="@array/col_entries"
-			android:entryValues="@array/col_vals"
-			android:defaultValue="#ffffffff"
-			/>   
-		    
 			<EditTextPreference
 			android:key="ssize"
 			android:title="Small Clock Resolution"
 			android:summary="Change if the small clock is too big/small"
-			android:defaultValue="60"
+			android:defaultValue="40"
 			android:inputType="number" 
 			/>
 		    			
@@ -74,105 +114,36 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	
 	
 				
-	<PreferenceScreen 
-	android:title="Clock Widget Settings"
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+	android:title="General Settings"
 	>
-		<PreferenceScreen 
-		android:title="Battery Display Settings"
-		>
-			<CheckBoxPreference
-			android:title="Show Battery Circle"
-			android:key="showbat"
-			android:defaultValue="true"
-			android:summary="Don't panic if you see ... It takes a minute"
-			/>
-		</PreferenceScreen>
 
-		<PreferenceScreen
-		android:title="Weather Display Settings"
-		>
-			<CheckBoxPreference
-			android:title="Show Weather Circle"
-			android:key="showweather"
-			android:defaultValue="true"
-			android:summary="If you see then there's a Location issue"
-			/>		
-			
-			<ListPreference
-			android:key="weatherinterval"
-			android:title="Update Interval"
-			android:summary="This is not a separate service, so it's memory efficient" 
-			android:entries="@array/interval_entries"
-			android:entryValues="@array/interval_vals"
-			android:defaultValue="60l"
-			android:dependency="showweather"
-			/>   
-			    
-		</PreferenceScreen>
-			
-	        	   
-	    <PreferenceScreen 
-		android:title="Time Display Settings"
-		>
-			<CheckBoxPreference
-			android:key="hprop"
-			android:title="Fully Proportional Hours"			     
-			android:defaultValue="true"
-			android:summary="Enable if you want the hour arm's position within an hour to be influenced by
-			the minute of the hour"			
-	    	/>
-			
-			<ListPreference
-			android:key="clcol"
-			android:title="Clock Color"
-			android:entries="@array/col_entries"
-			android:entryValues="@array/col_vals"
-			android:defaultValue="#ffffffff"
-			/>   
-	    		    
-			<CheckBoxPreference
-			android:key="doarms"
-			android:title="Show Arms"
-			android:defaultValue="true"
-			/>   
-
-			<CheckBoxPreference
-			android:key="dobig"
-			android:title="Show Big Clock"
-			android:defaultValue="true"
-			/>   
-		
-			<ListPreference
-			android:key="perc"
-			android:title="Minute Circle Size"
-			android:entries="@array/c2rad_entries"
-			android:entryValues="@array/c2rad_vals"
-			android:defaultValue="50f"
-			/>   
-
-			<EditTextPreference
-			android:key="dot_t"
-			android:title="Dot Size"
-			android:defaultValue="4"
-			android:summary="Dots at the center/arms of clocks"
-			android:inputType="numberDecimal" 
-			/>   
-					
-			<EditTextPreference
-			android:key="lsize"
-			android:title="Large Clock Resolution"
-			android:summary="Increase if the clock is too small or blury"
-			android:defaultValue="220"
-			android:inputType="number"
-			/>
-		</PreferenceScreen>
-    </PreferenceScreen>
-
+	<ListPreference
+	android:key="clcol"
+	android:title="Widget Color"
+	android:entries="@array/col_entries"
+	android:entryValues="@array/col_vals"
+	android:defaultValue="#ffffffff"
+	/>   
+	
+	<CheckBoxPreference
+	android:key="eurotemp"
+	android:title="Use Celcius"
+	android:summary="Takes effect next weather update"
+	/>
+	
 	<ListPreference
 	android:key="launchoice"	 	
 	android:title="App Shortcut"
 	android:summary="Touch left of clock (for Clock Widget) or center of clock (for Info Widget)"
     />
 	
+	   
+	</PreferenceCategory>
+
+
 	
 </PreferenceScreen>

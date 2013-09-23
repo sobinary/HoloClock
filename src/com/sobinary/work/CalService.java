@@ -1,12 +1,13 @@
-package weather;
+package com.sobinary.work;
 
 import java.util.Calendar;
 
-import sobinmain.GenMan;
+import com.sobinary.app.BigInfoProvider;
+import com.sobinary.base.Core;
 
 
 
-import base.Core;
+
 
 import android.app.Service;
 import android.content.ContentResolver;
@@ -36,7 +37,7 @@ public class CalService extends Service
 	public void onCreate()
 	{
 		super.onCreate();
-		Core.print("Hello XCalendar");
+		Core.print("Hello CalService");
 	}
 	
 	@Override
@@ -134,25 +135,25 @@ public class CalService extends Service
 			left = "0 Events";
 			right = "Forever Alone";  
 		}
-		Core.print("Left: " + left);
-		Core.print("Right: " + right);
-		GenMan.setTextLine(cont, 3, left, right);
+		BigInfoProvider.setTextLine(cont, 3, left, right);
 		cursor.close();
 	}
 	
 	static String prettyTime(Calendar cal, boolean euro)
 	{
-		if(euro)
+		if(euro){
 			if(cal.get(Calendar.MINUTE) == 0)
 				return cal.get(Calendar.HOUR_OF_DAY) + "h";
 			else
 				return cal.get(Calendar.HOUR_OF_DAY)+":"+prettyMin(cal.get(Calendar.MINUTE));
-		else
+		}
+		else{
 			if(cal.get(Calendar.MINUTE) == 0) 
 				return cal.get(Calendar.HOUR) + ((cal.get(Calendar.AM_PM)==Calendar.AM) ? "am" : "pm"); 
 			else 
 				return cal.get(Calendar.HOUR)+":"+prettyMin(cal.get(Calendar.MINUTE))+
 					((cal.get(Calendar.AM_PM)==Calendar.AM) ? "am" : "pm");
+		}
 	}
 	
 	static String prettyMin(int min)
