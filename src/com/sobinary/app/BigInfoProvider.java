@@ -52,8 +52,8 @@ public class BigInfoProvider extends AppWidgetProvider
 	
 	private static boolean isAlive(Context cont, Class<?>clazz)
 	{
-		ComponentName thisWidget = new ComponentName(cont, clazz);
-		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
+		ComponentName thisWidget = new ComponentName(cont.getApplicationContext(), clazz);
+		AppWidgetManager appMan = AppWidgetManager.getInstance(cont.getApplicationContext());
 		return (appMan.getAppWidgetIds(thisWidget).length > 0) ? true : false;
 	}
 
@@ -208,7 +208,8 @@ public class BigInfoProvider extends AppWidgetProvider
 		}
 
 		int []viewIds = viewIds();
-		for(int i=0; i < 7; i++) {
+		for(int i=0; i < viewIds.length; i++) 
+		{
 			remoteV.setTextColor(viewIds[i], color);
 			remoteV.setTextViewText(viewIds[i], old[i]);
 		}
@@ -260,7 +261,7 @@ public class BigInfoProvider extends AppWidgetProvider
 	
 	private static String[] load(Context cont)
 	{
-		String[]old = (String[])IO.load("savedtext", cont);
+		String[]old = (String[])IO.load("savedtext", cont.getApplicationContext());
 		if(old == null) 
 		{
 			old = new String[]
@@ -272,6 +273,13 @@ public class BigInfoProvider extends AppWidgetProvider
 			};
 		}
 		return old;
+	}
+
+	private static void save(Context cont, String str, int pos)
+	{
+		String[]old = load(cont);
+		old[pos] = str;
+		IO.save("savedtext", old, cont);
 	}
 	
 	private static Bitmap loadImage(Context cont)
@@ -300,12 +308,4 @@ public class BigInfoProvider extends AppWidgetProvider
 			Core.print("Err saving bmp: " + e.getMessage());
 		}
 	}
-	
-	private static void save(Context cont, String str, int pos)
-	{
-		String[]old = load(cont);
-		old[pos] = str;
-		IO.save("savedtext", old, cont);
-	}
-
 }

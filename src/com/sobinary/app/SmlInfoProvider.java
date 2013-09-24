@@ -76,9 +76,9 @@ public class SmlInfoProvider extends BigInfoProvider
 	
 	private static String[] load(Context cont)
 	{
-		String[]old = (String[])IO.load("savedtext", cont);
+		String[]old = (String[])IO.load("savedtextsml", cont);
 		if(old == null) 
-			old = new String[]{"Preferences",};
+			old = new String[]{"Preferences"};
 		return old;
 	}
 	
@@ -86,7 +86,7 @@ public class SmlInfoProvider extends BigInfoProvider
 	{
 		String[]old = load(cont);
 		old[pos] = str;
-		IO.save("savedtext", old, cont);
+		IO.save("savedtextsml", old, cont);
 	}
 	
 }

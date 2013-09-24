@@ -33,9 +33,10 @@ public class MinuteService extends Service
 
 	public static void tic(Context cont)
 	{
-		MinuteRenderer rend = new MinuteRenderer(cont);
+		MinuteRenderer rend = new MinuteRenderer(cont); 
  
 		List<Class<?>>alive = BigInfoProvider.getLivingProviders(cont);
+		debug(alive);
 		
 		if(alive.contains(BigClockProvider.class))
 		{
@@ -56,4 +57,41 @@ public class MinuteService extends Service
 		rend = null;
 		System.gc();
 	}
+	
+	private static void debug(List<Class<?>>provs)
+	{
+		String present = "";
+		for(Class<?> prov : provs)present += prov.getSimpleName();
+		Core.print(present);
+		
+		Core.print("BigInfoProvider: " + provs.contains(BigInfoProvider.class));
+		Core.print("BigClockProvider: " + provs.contains(BigClockProvider.class));
+		Core.print("SmlInfoProvider: " + provs.contains(SmlInfoProvider.class));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

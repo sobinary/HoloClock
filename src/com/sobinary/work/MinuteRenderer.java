@@ -42,7 +42,7 @@ public class MinuteRenderer
 	private float minuteRdn, hourRdn;
 	private float smallRad, smallRadFull, bigRad, bigRadFull, gaugeRad;
 	private boolean isVisibleBat, isVisibleWeath;
-	
+	 
 	private Bitmap bmp;
 	private Canvas can;
 	private final Paint paint;
