@@ -2,6 +2,7 @@ package com.sobinary.app;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +12,34 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+import com.sobinary.base.Core;
 import com.sobinary.base.IO;
 import com.sobinary.clockplus.R;
 
-public class SmlInfoProvider extends BigInfoProvider
+public class SmlInfoProvider extends AppWidgetProvider
 {
+
+	@Override
+	public void onEnabled(Context cont)
+	{
+		super.onEnabled(cont);
+	}
+	
+	@Override
+	public void onUpdate(Context cont, AppWidgetManager appMan, int[] ids)
+	{
+		super.onUpdate(cont, appMan, ids);
+		Core.print("Generic update");
+		BigInfoProvider.beginTime(cont.getApplicationContext());
+	}
+	
+	@Override
+	public void onDisabled(Context cont)
+	{
+		super.onDisabled(cont);
+		Core.print("Provider disabled");
+		BigInfoProvider.endTime(cont);
+	}
 
 	
 	public static boolean isAlive(Context cont)
