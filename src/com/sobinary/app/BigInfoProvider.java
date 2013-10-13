@@ -41,7 +41,7 @@ public class BigInfoProvider extends AppWidgetProvider
 		Core.print("Generic update");
 		beginTime(cont.getApplicationContext());
 	}
-	
+	  
 	@Override
 	public void onDisabled(Context cont)
 	{

@@ -31,7 +31,8 @@ public class WeatherService extends Service
 	public static final String REQ_TYPE = "reqType"; 
 	public static final int GET_NOW = 1;
 	public static final int GET_OUTLOOK = 2;
-	private static final String URL_LEFT = "http://api.wunderground.com/api/5880406b8de33379";
+	
+	private static final String URL_LEFT = "http://api.wunderground.com/api/01dc8bce3eaf509a";
 
 	private static String resp;
 
