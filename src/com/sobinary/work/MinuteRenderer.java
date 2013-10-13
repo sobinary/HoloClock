@@ -279,9 +279,9 @@ public class MinuteRenderer
 	
 	private void drawGauge(float dashAng, boolean hor, String text)
 	{
-		float hourRdnTwo = hor ? (float)Math.toRadians( (hour >= 6) ? 0 : 180 ) :
-			(float)Math.toRadians( (hour >= 3 && hour <= 9) ? 270 : 90 );
-	  
+		float hourRdnTwo = hor ? (float)( (hour >= 6 && hour <= 12) ? 0 : Math.PI)  :
+								 (float)( (hour >= 3 && hour <= 9) ? Math.PI/2 : 3*Math.PI/2 );
+		
 		float minuteCenterDist = bigRad - BIG_CIRC_STROKE_WIDTH - gaugeRad;
 		float xGauge = bigRadFull + minuteCenterDist * (float)Math.cos(hourRdnTwo);
 		float yGauge = bigRadFull + minuteCenterDist * (float)Math.sin(hourRdnTwo);
