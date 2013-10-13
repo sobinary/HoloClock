@@ -109,7 +109,7 @@ public class WeatherService extends Service
 		if(extremae == null) return null;
 		float hi = extremae[1], lo = extremae[0];
 		float rat = (t - lo) / (hi - lo); 
-		rat = rat > 1 ? 1 : rat;
+		rat = rat > 1.0f ? 1.0f : rat;
 		
 		Core.print("[QuickLook]Weather fetch success");
 		return new float[]{t, rat};

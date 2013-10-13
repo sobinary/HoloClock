@@ -36,9 +36,9 @@ public class Core
   
 	public static void print(String s)
 	{
-		if( debug ) Log.d("socialwid", s);
+		if( debug ) Log.d("holoclock", s);
 	}
-	
+	  
 	public static boolean isOnline(Context cont)
 	{
 		ConnectivityManager cm = (ConnectivityManager) cont.getSystemService(Context.CONNECTIVITY_SERVICE);

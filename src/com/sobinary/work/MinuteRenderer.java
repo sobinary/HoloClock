@@ -30,7 +30,7 @@ import android.preference.PreferenceManager;
 
 public class MinuteRenderer 
 {
-	/**********PSEUDO CONSTANT STYLE-PARAMS*************/
+	/**********PSEUDO CONSTANT STYLING-PARAMS*************/
 	private float BIG_CIRC_STROKE_WIDTH = 6.0f;
 	private float SML_CIRC_STROKE_WIDTH = 4.0f;
 	private float GAUGE_TEXT_SIZE = 38f;
@@ -280,7 +280,7 @@ public class MinuteRenderer
 	private void drawGauge(float dashAng, boolean hor, String text)
 	{
 		float hourRdnTwo = hor ? (float)( (hour >= 6 && hour <= 12) ? 0 : Math.PI)  :
-								 (float)( (hour >= 3 && hour <= 9) ? Math.PI/2 : 3*Math.PI/2 );
+								 (float)( (hour >= 3 && hour <= 9) ? 3*Math.PI/2 : Math.PI/2 );
 		
 		float minuteCenterDist = bigRad - BIG_CIRC_STROKE_WIDTH - gaugeRad;
 		float xGauge = bigRadFull + minuteCenterDist * (float)Math.cos(hourRdnTwo);
