@@ -36,7 +36,7 @@ public class Core
   
 	public static void print(String s)
 	{
-		if( debug ) Log.d("holoclock", s);
+		if(debug) Log.d("holoclock", s);
 	}
 	  
 	public static boolean isOnline(Context cont)

@@ -29,6 +29,7 @@ public class PreferencesActivity extends PreferenceActivity
 {	
 	private ProgressDialog progDiag;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle sis)
 	{
@@ -124,6 +125,7 @@ public class PreferencesActivity extends PreferenceActivity
 		
 		Collections.sort(pairs);
 
+		@SuppressWarnings("deprecation")
 		ListPreference listPref = (ListPreference)this.findPreference("launchoice");
 		CharSequence[]keys = new CharSequence[pairs.size()];
 		CharSequence[]vals = new CharSequence[pairs.size()];
@@ -138,7 +140,6 @@ public class PreferencesActivity extends PreferenceActivity
 		listPref.setEntryValues(keys);
 		listPref.setEntries(vals);
 	}
-	
 }
 
 

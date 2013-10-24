@@ -27,7 +27,7 @@ public class BigClockProvider extends AppWidgetProvider
 	public void onUpdate(Context cont, AppWidgetManager appMan, int[] ids)
 	{
 		super.onUpdate(cont, appMan, ids);
-		Core.print("Generic update");
+		Core.print("BigClockProvider update");
 		BigInfoProvider.beginTime(cont.getApplicationContext());
 	}
 	
