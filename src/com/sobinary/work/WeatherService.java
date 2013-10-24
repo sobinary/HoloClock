@@ -31,7 +31,7 @@ public class WeatherService extends Service
 		
 		int req = intent.getExtras().getInt(REQ_TYPE);
 		final Context cont = getApplicationContext();
-		WeatherGetter weather = new WeatherGetter(cont);
+		final WeatherGetter weather = new WeatherGetter(cont);
 		
 		if(req == GET_NOW) 
 		{
@@ -45,7 +45,7 @@ public class WeatherService extends Service
 		{
 			BigInfoProvider.setTextLine(cont, 2, "...", "...");
 			String[]res = weather.getOutlook();
-			if(res != null) BigInfoProvider.setTextLine(cont, 2, res[1], res[0]);
+			if(res != null) BigInfoProvider.setTextLine(cont, 2, res[0], res[1]);
 			else BigInfoProvider.setTextLine(cont, 2, "Oops", "Try Again");
 		}
 

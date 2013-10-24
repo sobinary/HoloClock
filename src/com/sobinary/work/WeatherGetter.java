@@ -3,10 +3,8 @@ package com.sobinary.work;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Date;
 import java.util.Calendar;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
@@ -26,7 +25,7 @@ public class WeatherGetter
 {
     private static final String URL_WUND = "http://api.wunderground.com/api/5880406b8de33379";
 	private static final String URL_LEFT = "http://api.openweathermap.org/data/2.5/";
-	private static final String URL_RIGHT = "&units=metric&mode=json";
+	private static final String URL_RIGHT = "&mode=json";
 
 	private Context cont;
 	private boolean euro;
@@ -87,7 +86,7 @@ public class WeatherGetter
 		float lo = (float)extremae[0];
 		float rat = (t - lo) / (hi - lo); 
 		
-		Core.print("Lo: " + lo + " Hi: " + hi + " t: " + t);
+		Core.print("Lo: " + lo + " Hi: " + hi + " t: " + t); 
 		rat = rat > 1.0f ? 1.0f : rat;
 		
 		Core.print("[GetTempAndRat] Weather fetch success");
@@ -292,15 +291,15 @@ public class WeatherGetter
 	
 	private String prettyTemp(int t)
 	{
-		return t+""+(euro ? "C°" : "F°");
+		return t + (euro ? "°C" : "°F");
 	}
-	
+	 
 	private String url(String params, boolean wund)
 	{
 		if(wund)
 			return URL_WUND + coordsToWund(params) + ".json";
 		else
-			return URL_LEFT + params + URL_RIGHT;
+			return URL_LEFT + params + "&units=" + units() + URL_RIGHT;
 	}
 	
 	private String coordsToWund(String raw)
@@ -308,6 +307,12 @@ public class WeatherGetter
 		return raw.replace("lat=", "").replace("&lon=", ",");
 	}
 	
+	private String units()
+	{
+		return euro ? "metric" : "imperial";
+	}
+	
+	@SuppressLint("DefaultLocale")
 	public static String capitalize(String str)  
 	{
 		char[] chars = str.toLowerCase().toCharArray();

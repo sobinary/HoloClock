@@ -227,7 +227,7 @@ public class MinuteRenderer
 		long now = System.currentTimeMillis();
 		long interval = Long.parseLong(Core.bleach(prefs.getString("weatherinterval", "60l"))) * 60 * 1000;
 		
-		if(now - prev > interval || true)
+		if(now - prev > interval)
 		{
 			WeatherGetter weather = new WeatherGetter(cont);
 			float[]data = weather.getTempAndRat();
