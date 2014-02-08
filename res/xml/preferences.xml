@@ -2,14 +2,9 @@
 <PreferenceScreen
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
-		<PreferenceCategory
+	<PreferenceCategory
 		android:title="Specialized Settings"
-		>
-
-
-
-
-
+	>
 
 	<PreferenceScreen 
 	android:title="Clock Widget Settings"
@@ -93,7 +88,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:defaultValue="40"
 			android:inputType="number" 
 			/>
-		    			
 		</PreferenceCategory>
 				
 				
@@ -121,12 +115,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	android:title="General Settings"
 	>
 
-	<ListPreference
+	<com.sobinary.clockplus.app.ColorPickerDialog
 	android:key="clcol"
 	android:title="Widget Color"
-	android:entries="@array/col_entries"
-	android:entryValues="@array/col_vals"
-	android:defaultValue="#ffffffff"
 	/>   
 	
 	<CheckBoxPreference

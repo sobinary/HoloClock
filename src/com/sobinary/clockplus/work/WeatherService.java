@@ -1,7 +1,7 @@
-package com.sobinary.work;
+package com.sobinary.clockplus.work;
 
-import com.sobinary.app.BigInfoProvider;
-import com.sobinary.base.Core;
+import com.sobinary.clockplus.app.BigInfoProvider;
+import com.sobinary.clockplus.base.Core;
 
 
 

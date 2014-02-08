@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest     
 xmlns:android="http://schemas.android.com/apk/res/android"
 package="com.sobinary.clockplus"
-android:versionCode="18"
-android:versionName="2.1"  
+android:versionCode="19"
+android:versionName="2.3"  
 >                 
     <uses-sdk     
     android:minSdkVersion="14"
@@ -12,16 +13,18 @@ android:versionName="2.1"
           
     <uses-permission android:name="android.permission.INTERNET"/>  
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
-	<uses-permission android:name="android.permission.READ_CALENDAR" />
-	
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.READ_CALENDAR"/>
+	 
 	<supports-screens    
 	android:resizeable="true"
     android:smallScreens="false"
     android:normalScreens="true"       
     android:largeScreens="true"
-    android:xlargeScreens="true"   
+    android:xlargeScreens="true"     
 	/>   
 
     <application 
@@ -30,7 +33,7 @@ android:versionName="2.1"
 	android:label="Holo Clock Widget++"
     > 
 		<activity 
-		android:name="com.sobinary.app.PreferencesActivity"
+		android:name="com.sobinary.clockplus.app.PreferencesActivity"
 		>
     		<intent-filter>
         		<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
@@ -38,27 +41,22 @@ android:versionName="2.1"
 		    		
 		</activity>
             
-		<activity 
-		android:name="social.FaceActivity"
-		android:theme="@style/Theme.Transparent"
+		<service
+		android:name="com.sobinary.clockplus.work.WeatherService" 
 		/>
 
 		<service
-		android:name="com.sobinary.work.WeatherService" 
-		/>
-
-		<service
-		android:name="com.sobinary.work.MinuteService" 
+		android:name="com.sobinary.clockplus.work.MinuteService" 
 		/>
 				
 
 		<service
-		android:name="com.sobinary.work.CalService" 
+		android:name="com.sobinary.clockplus.work.CalService" 
 		/>
 		
 		
 		<receiver 
-		android:name="com.sobinary.app.BigInfoProvider"     
+		android:name="com.sobinary.clockplus.app.BigInfoProvider"     
 		android:label="2-Holo Info Large++"
 		>
     		<intent-filter>
@@ -72,7 +70,7 @@ android:versionName="2.1"
 		</receiver>
 
 		<receiver 
-		android:name="com.sobinary.app.SmlInfoProvider"     
+		android:name="com.sobinary.clockplus.app.SmlInfoProvider"     
 		android:label="3-Holo Info Small++"
 		>
     		<intent-filter>
@@ -86,7 +84,7 @@ android:versionName="2.1"
 		</receiver>
 				
 		<receiver 
-		android:name="com.sobinary.app.BigClockProvider"     
+		android:name="com.sobinary.clockplus.app.BigClockProvider"     
 		android:label="1-Holo Clock++"
 		>
     		<intent-filter>

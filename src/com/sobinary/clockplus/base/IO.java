@@ -1,4 +1,4 @@
-package com.sobinary.base;
+package com.sobinary.clockplus.base;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

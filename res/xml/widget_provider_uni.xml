@@ -2,7 +2,7 @@
 
 <appwidget-provider
 xmlns:android="http://schemas.android.com/apk/res/android"
-android:configure="com.sobinary.app.PreferencesActivity"
+android:configure="com.sobinary.clockplus.app.PreferencesActivity"
 android:minWidth="250dp"
 android:minHeight="110dp"
 android:updatePeriodMillis="9999999999"

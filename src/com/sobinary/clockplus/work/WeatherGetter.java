@@ -1,4 +1,4 @@
-package com.sobinary.work;
+package com.sobinary.clockplus.work;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,7 +19,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
 
-import com.sobinary.base.Core;
+import com.sobinary.clockplus.base.Core;
 
 public class WeatherGetter 
 {
@@ -39,19 +39,31 @@ public class WeatherGetter
 		this.coords = getLocation();
 	}
 	
+	private Location getRawLocation()
+	{
+		LocationManager locMan = (LocationManager) cont.getSystemService(Context.LOCATION_SERVICE);
+		String providers[] = {LocationManager.NETWORK_PROVIDER, 
+				LocationManager.GPS_PROVIDER, LocationManager.PASSIVE_PROVIDER};
+		
+		for(String provider: providers){
+			Location loc = locMan.getLastKnownLocation(provider);
+			if(loc != null) return loc;
+		}
+		return null;
+	}
+	
 	private String getLocation()
 	{
-		try
+		try  
 		{
 			Core.print("Getting device coordinates");
-			LocationManager locMan = (LocationManager) cont.getSystemService(Context.LOCATION_SERVICE);
-			Location netLoc = locMan.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			if(netLoc == null)
-			{ 
+			Location location = getRawLocation();
+			
+			if(location == null){ 
 				Core.print("[GetLocation]Location null"); 
 				return null; 
 			}
-			return "lat="+netLoc.getLatitude()+"&lon="+netLoc.getLongitude();
+			return "lat="+location.getLatitude()+"&lon="+location.getLongitude();
 		}
 		catch(Exception e)
 		{

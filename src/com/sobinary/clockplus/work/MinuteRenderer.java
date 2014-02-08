@@ -1,13 +1,13 @@
- package com.sobinary.work;
+ package com.sobinary.clockplus.work;
 
 import java.util.Calendar;
 
 
-import com.sobinary.app.SmlInfoProvider;
-import com.sobinary.app.BigInfoProvider;
-import com.sobinary.app.BigClockProvider;
-import com.sobinary.base.Core;
 import com.sobinary.clockplus.R;
+import com.sobinary.clockplus.app.SmlInfoProvider;
+import com.sobinary.clockplus.app.BigInfoProvider;
+import com.sobinary.clockplus.app.BigClockProvider;
+import com.sobinary.clockplus.base.Core;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
@@ -30,7 +29,15 @@ import android.preference.PreferenceManager;
 
 public class MinuteRenderer 
 {
+	
+	
+	
+	
+	
 	/**********PSEUDO CONSTANT STYLING-PARAMS*************/
+	
+	
+	
 	private float BIG_CIRC_STROKE_WIDTH = 6.0f;
 	private float SML_CIRC_STROKE_WIDTH = 4.0f;
 	private float GAUGE_TEXT_SIZE = 38f;
@@ -147,7 +154,7 @@ public class MinuteRenderer
 		this.can.drawColor(0, Mode.CLEAR);
 		
 		paint.setAntiAlias(true);
-  		paint.setColor(Color.parseColor( prefs.getString("clcol", "#ffffffff")));
+		paint.setColor(prefs.getInt("clcol", 0xffffffff));
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(SML_CIRC_STROKE_WIDTH);
 
@@ -180,7 +187,7 @@ public class MinuteRenderer
 		this.can.drawColor(0, Mode.CLEAR);
 
 		paint.setAntiAlias(true);
-		paint.setColor(Color.parseColor( prefs.getString("clcol", "#ffffffff")));
+		paint.setColor(prefs.getInt("clcol", 0xffffffff));
 		paint.setStyle(Paint.Style.FILL);
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(BIG_CIRC_STROKE_WIDTH);

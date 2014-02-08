@@ -1,4 +1,4 @@
-package com.sobinary.app;
+package com.sobinary.clockplus.app;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,13 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
-import com.sobinary.base.Core;
-import com.sobinary.base.IO;
 import com.sobinary.clockplus.R;
+import com.sobinary.clockplus.base.Core;
+import com.sobinary.clockplus.base.IO;
 
 public class SmlInfoProvider extends AppWidgetProvider
 {
@@ -41,7 +40,6 @@ public class SmlInfoProvider extends AppWidgetProvider
 		BigInfoProvider.endTime(cont);
 	}
 
-	
 	public static boolean isAlive(Context cont)
 	{
 		ComponentName thisWidget = new ComponentName(cont, SmlInfoProvider.class);
@@ -55,7 +53,7 @@ public class SmlInfoProvider extends AppWidgetProvider
 		ComponentName thisWidget = new ComponentName(cont, SmlInfoProvider.class);
 		AppWidgetManager appMan = AppWidgetManager.getInstance(cont);
 		
-		int color = Color.parseColor((prefs(cont).getString("macol", "#ffffffff")));
+		int color = prefs(cont).getInt("clcol", 0xffffff);
 		remote.setTextViewText(R.id.line0, left);
 		remote.setTextColor(R.id.line0, color);
 		save(cont, left, 0);
@@ -82,7 +80,7 @@ public class SmlInfoProvider extends AppWidgetProvider
 		RemoteViews remoteV = new RemoteViews( cont.getPackageName(), R.layout.date_time );
 		String[]old = load(cont);
 
-		int color = Color.parseColor((prefs(cont).getString("macol", "#ffffffff")));
+		int color = prefs(cont).getInt("clcol", 0xffffffff);
 		remoteV.setTextColor(R.id.line0, color);
 		remoteV.setTextViewText(R.id.line0, old[0]);
 		

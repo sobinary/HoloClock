@@ -1,4 +1,4 @@
-package com.sobinary.app;
+package com.sobinary.clockplus.app;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -11,8 +11,8 @@ import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
-import com.sobinary.base.Core;
 import com.sobinary.clockplus.R;
+import com.sobinary.clockplus.base.Core;
 
 public class BigClockProvider extends AppWidgetProvider
 {
@@ -21,6 +21,7 @@ public class BigClockProvider extends AppWidgetProvider
 	public void onEnabled(Context cont)
 	{
 		super.onEnabled(cont);
+		Core.print("BigClockProvider enable");
 	}
 	
 	@Override
@@ -32,7 +33,7 @@ public class BigClockProvider extends AppWidgetProvider
 	}
 	
 	@Override
-	public void onDisabled(Context cont)
+	public void onDisabled(Context cont)  
 	{
 		super.onDisabled(cont);
 		Core.print("Provider disabled");

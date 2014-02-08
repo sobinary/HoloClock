@@ -1,11 +1,11 @@
-package com.sobinary.work;
+package com.sobinary.clockplus.work;
   
 import java.util.List;
 
-import com.sobinary.app.BigClockProvider;
-import com.sobinary.app.BigInfoProvider;
-import com.sobinary.app.SmlInfoProvider;
-import com.sobinary.base.Core;
+import com.sobinary.clockplus.app.BigClockProvider;
+import com.sobinary.clockplus.app.BigInfoProvider;
+import com.sobinary.clockplus.app.SmlInfoProvider;
+import com.sobinary.clockplus.base.Core;
 
 
 import android.app.Service;

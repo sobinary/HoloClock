@@ -1,16 +1,16 @@
-package com.sobinary.app;
+package com.sobinary.clockplus.app;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.sobinary.base.Core;
-import com.sobinary.base.IO;
 import com.sobinary.clockplus.R;
-import com.sobinary.work.CalService;
-import com.sobinary.work.MinuteService;
-import com.sobinary.work.WeatherService;
+import com.sobinary.clockplus.base.Core;
+import com.sobinary.clockplus.base.IO;
+import com.sobinary.clockplus.work.CalService;
+import com.sobinary.clockplus.work.MinuteService;
+import com.sobinary.clockplus.work.WeatherService;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
@@ -146,7 +145,7 @@ public class BigInfoProvider extends AppWidgetProvider
 		
 		int ind = lineToInd(line);
 		int []viewIds = viewIds();
-		int color = Color.parseColor((prefs(cont).getString("macol", "#ffffffff")));
+		int color = prefs(cont).getInt("clcol", 0xffffffff);
 		if(ind == 0)
 		{
 			remote.setTextViewText(viewIds[0], left);
@@ -198,7 +197,7 @@ public class BigInfoProvider extends AppWidgetProvider
 	private static RemoteViews resetRem(Context cont, boolean img)
 	{
 		RemoteViews remoteV = new RemoteViews( cont.getPackageName(), R.layout.main_phone );
-		int color = Color.parseColor(prefs(cont).getString("macol", "#ffffffff"));
+		int color = prefs(cont).getInt("clcol", 0xffffffff);
 		String[]old = load(cont);
 
 		if(img)
